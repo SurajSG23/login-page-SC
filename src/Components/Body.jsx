@@ -23,7 +23,7 @@ const Body = () => {
               Welcome to <br />{" "}
               <img
                 className="img-main"
-                src="./src/assets/SC-logo.png"
+                src="https://github.com/SurajSG23/login-page-SC/raw/main/src/assets/SC-logo.png"
                 alt="logo"
               />{" "}
               <img className="bot" src="https://github.com/SurajSG23/login-page-SC/raw/main/src/assets/favicon.png" alt="" />
