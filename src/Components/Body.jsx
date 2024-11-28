@@ -26,7 +26,7 @@ const Body = () => {
                 src="./src/assets/SC-logo.png"
                 alt="logo"
               />{" "}
-              <img className="bot" src="./src/assets/favicon.png" alt="" />
+              <img className="bot" src="../src/assets/favicon.png" alt="" />
             </h2>
           </div>
           <div className="about">
