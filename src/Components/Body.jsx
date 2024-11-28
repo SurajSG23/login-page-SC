@@ -26,7 +26,7 @@ const Body = () => {
                 src="./src/assets/SC-logo.png"
                 alt="logo"
               />{" "}
-              <img className="bot" src="../src/assets/favicon.png" alt="" />
+              <img className="bot" src="https://github.com/SurajSG23/login-page-SC/raw/main/src/assets/favicon.png" alt="" />
             </h2>
           </div>
           <div className="about">
@@ -43,7 +43,7 @@ const Body = () => {
           </div>
         </div>
         <div className="right">
-          {displayForm()} {/* Fix: Call the function */}
+          {displayForm()} 
         </div>
       </div>
     </MainContainer>
@@ -59,7 +59,7 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  background: url("../src/assets/bg-auth.png") no-repeat center/cover;
+  background: url("https://github.com/SurajSG23/login-page-SC/raw/main/src/assets/bg-auth.png") no-repeat center/cover;
   .body {
     width: 95%;
     height: 95vh;
