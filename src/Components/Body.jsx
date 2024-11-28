@@ -59,7 +59,7 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  background: url("./src/assets/bg-auth.png") no-repeat center/cover;
+  background: url("../src/assets/bg-auth.png") no-repeat center/cover;
   .body {
     width: 95%;
     height: 95vh;
