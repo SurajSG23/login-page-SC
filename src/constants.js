@@ -1,0 +1,1 @@
+export const backendURL = 'https://video-upload-poc.onrender.com'

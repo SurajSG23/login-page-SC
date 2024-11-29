@@ -2,15 +2,40 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { FaGoogle } from "react-icons/fa";
+import { backendURL } from "../constants";
 const Register = ({ setDisplay }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSignUp = (event) => {
+  const handleSignUp = async(event) => {
     event.preventDefault();
-    console.log(email + " " + password);
-    setEmail("");
-    setPassword("");
+    try {
+      setLoading(true);
+      const response = await fetch(`${backendURL}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email, password, username }),
+      })
+      const data = await response.json()
+      if(data){
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user",  JSON.stringify(data.user));
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    finally{
+      setLoading(false);
+      setEmail("");
+      setPassword("");
+      setUsername("");
+    }
   };
 
   const handleGoogleSignUp = () => {
@@ -44,6 +69,21 @@ const Register = ({ setDisplay }) => {
               <input
                 required
                 id="input"
+                type="text"
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+                value={username}
+              />
+              <label htmlFor="input" className="label">
+                Username
+              </label>
+              <div className="underline"></div>
+            </div>
+            <div className="input-container">
+              <input
+                required
+                id="input"
                 type="password"
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -57,7 +97,7 @@ const Register = ({ setDisplay }) => {
             </div>
             <div className="btn">
               <div className="btn">
-                <button className="button">Sign Up</button>
+                <button className="button">{loading?'Signing up...':'Sign up'}</button>
               </div>
             </div>
           </form>

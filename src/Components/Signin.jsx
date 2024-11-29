@@ -2,16 +2,35 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
+import { backendURL } from "../constants";
 const Signin = ({setDisplay}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
   
-    const handleSignUp=(event)=>{
+    const handleSignUp=async (event)=>{
       event.preventDefault()
-      console.log(email+" "+password)
+      try {
+        const response = await fetch(`${backendURL}/login`,{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          credentials:"include",
+          body:JSON.stringify({email,password})
+        })
+        const data = await response.json()
+        if(data){
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user",  JSON.stringify(data.user));
+        }
+      } catch (error) {
+        console.log("Error", error)
+      }
       setEmail("");
       setPassword("");
     }
+
+    
   
     const handleGoogleSignUp=()=>{
       console.log("Google Sign Up")
