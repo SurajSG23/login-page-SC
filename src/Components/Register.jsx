@@ -190,6 +190,7 @@ const MainContainer = styled.div`
   padding: 40px 0;
   .cont{
     height: 42vh;
+    padding-top: 14px;
     overflow-y: auto;
   }
   .body2 {
