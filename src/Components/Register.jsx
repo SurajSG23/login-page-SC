@@ -3,14 +3,18 @@ import { useState } from "react";
 import styled from "styled-components";
 import { FaGoogle } from "react-icons/fa";
 import { backendURL } from "../constants";
+
 const Register = ({ setDisplay }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [college, setCollege] = useState("");
+  const [branch, setBranch] = useState("");
+  const [interest, setInterest] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSignUp = async(event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     try {
       setLoading(true);
@@ -20,21 +24,30 @@ const Register = ({ setDisplay }) => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ email, password, username }),
-      })
-      const data = await response.json()
-      if(data){
+        body: JSON.stringify({
+          email,
+          password,
+          username,
+          college,
+          branch,
+          interest,
+        }),
+      });
+      const data = await response.json();
+      if (data) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user",  JSON.stringify(data.user));
+        localStorage.setItem("user", JSON.stringify(data.user));
       }
     } catch (error) {
-      console.log(error)
-    }
-    finally{
+      console.log(error);
+    } finally {
       setLoading(false);
       setEmail("");
       setPassword("");
       setUsername("");
+      setCollege("");
+      setBranch("");
+      setInterest("");
     }
   };
 
@@ -48,68 +61,102 @@ const Register = ({ setDisplay }) => {
         <div>
           <h2>Register</h2>
         </div>
-        <div>
+        <div className="cont">
           <form action="submit" onSubmit={handleSignUp}>
+            {/* Email Input */}
             <div className="input-container">
               <input
                 required
-                id="input"
                 type="text"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
-              <label htmlFor="input" className="label">
-                Email
-              </label>
+              <label className="label">Email</label>
               <div className="underline"></div>
             </div>
+
+            {/* Username Input */}
             <div className="input-container">
               <input
                 required
-                id="input"
                 type="text"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
+                onChange={(e) => setUsername(e.target.value)}
                 value={username}
               />
-              <label htmlFor="input" className="label">
-                Username
-              </label>
+              <label className="label">Username</label>
               <div className="underline"></div>
             </div>
+
+            {/* Password Input */}
             <div className="input-container">
               <input
                 required
-                id="input"
                 type="password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
-              <label htmlFor="input" className="label">
-                Password
-              </label>
+              <label className="label">Password</label>
               <div className="underline"></div>
             </div>
+
+            {/* College Input */}
+            <div className="input-container">
+              <input
+                required
+                type="text"
+                onChange={(e) => setCollege(e.target.value)}
+                value={college}
+              />
+              <label className="label">College</label>
+              <div className="underline"></div>
+            </div>
+
+            {/* Branch Input */}
+            <div className="input-container">
+              <input
+                required
+                type="text"
+                onChange={(e) => setBranch(e.target.value)}
+                value={branch}
+              />
+              <label className="label">Branch</label>
+              <div className="underline"></div>
+            </div>
+
+            {/* Interest Input */}
+            <div className="input-container">
+              <input
+                required
+                type="text"
+                onChange={(e) => setInterest(e.target.value)}
+                value={interest}
+              />
+              <label className="label">Interest</label>
+              <div className="underline"></div>
+            </div>
+
+            {/* Submit Button */}
             <div className="btn">
-              <div className="btn">
-                <button className="button">{loading?'Signing up...':'Sign up'}</button>
-              </div>
+              <button className="button">
+                {loading ? "Signing up..." : "Sign up"}
+              </button>
             </div>
           </form>
         </div>
+
+        {/* OR Section */}
         <div className="or">
           <p>- - - - - - - - - - OR - - - - - - - - - -</p>
         </div>
+
+        {/* Google Sign Up Button */}
         <div className="google">
           <button className="button" onClick={handleGoogleSignUp}>
             <FaGoogle /> Google
           </button>
         </div>
+
+        {/* Sign In Redirect */}
         <div>
           <p>
             Already have an account?{" "}
@@ -141,6 +188,10 @@ const MainContainer = styled.div`
   align-items: center;
   animation: btn-anim1 1.5s linear infinite;
   padding: 40px 0;
+  .cont{
+    height: 42vh;
+    overflow-y: auto;
+  }
   .body2 {
     display: flex;
     flex-direction: column;
